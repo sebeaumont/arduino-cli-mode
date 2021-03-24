@@ -141,9 +141,9 @@
 
 (defun arduino-cli--compile (cmd)
   "Run arduino-cli CMD in 'arduino-cli-compilation-mode."
-  (let* ((cmd  (concat "arduino-cli " cmd " " (shell-quote-argument default-directory)))
+  (let* ((cmd  (concat "arduino-cli " cmd " " (shell-quote-argument buffer-file-name)))
          (cmd* (arduino-cli--add-flags 'compile cmd)))
-    (save-some-buffers (not compilation-ask-about-save) (lambda () default-directory))
+    (save-some-buffers (not compilation-ask-about-save) (lambda () buffer-file-name))
     (compilation-start cmd* 'arduino-cli-compilation-mode)))
 
 (defun arduino-cli--message (cmd &rest path)
